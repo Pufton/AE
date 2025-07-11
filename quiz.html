@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giriş Soruları</title>
+  <style>
+    body {
+      background-color: #fff;
+      color: #000;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .question-container {
+      max-width: 600px;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .question {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      animation: popIn 0.5s ease-out;
+    }
+
+    .options button {
+      background-color: #eee;
+      border: 1px solid #ccc;
+      padding: 12px 24px;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+    }
+
+    .options button:hover {
+      background-color: #000;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .strawberry {
+      position: absolute;
+      top: -40px;
+      width: 30px;
+      height: 30px;
+      background-image: url('strawberry_icon.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fall 6s linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-40px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="quiz">
+    <div class="question-container" id="q1">
+      <div class="question">1. Kuzumla İlk Doğacak Kızımıza Vereceğimiz İsim Nedir</div>
+      <div class="options">
+        <button onclick="checkAnswer(1, this, false)">Gökçe</button>
+        <button onclick="checkAnswer(1, this, true)">Asena</button>
+        <button onclick="checkAnswer(1, this, false)">Ülkü</button>
+      </div>
+    </div>
+    <div class="question-container" id="q2" style="display:none">
+      <div class="question">2. İlk kez ne zaman konuştuk?</div>
+      <div class="options">
+        <button onclick="checkAnswer(2, this, false)">27 Kasım 2024</button>
+        <button onclick="checkAnswer(2, this, true)">24 Haziran 2024</button>
+        <button onclick="checkAnswer(2, this, false)">17 Ocak 2025</button>
+      </div>
+    </div>
+    <div class="question-container" id="q3" style="display:none">
+      <div class="question">3. Benim En Hoşuma Giden Cümlen Nedir?</div>
+      <div class="options">
+        <button onclick="checkAnswer(3, this, true)">“Seni Seviyorum.”</button>
+        <button onclick="checkAnswer(3, this, false)">“Şapşik.”</button>
+        <button onclick="checkAnswer(3, this, false)">“Tosbişim.”</button>
+      </div>
+    </div>
+    <div id="access-granted" style="display:none">
+      <h2>🎉 Doğru Cevaplar! Sayfa Yükleniyor...</h2>
+    </div>
+  </div>
+
+  <script>
+    let currentQuestion = 1;
+
+    function checkAnswer(qNum, btn, isCorrect) {
+      if (isCorrect) {
+        btn.style.backgroundColor = '#4caf50';
+        btn.style.color = '#fff';
+        setTimeout(() => {
+          document.getElementById(`q${qNum}`).style.display = 'none';
+          if (qNum < 3) {
+            const next = document.getElementById(`q${qNum + 1}`);
+            next.style.display = 'block';
+          } else {
+            document.getElementById("access-granted").style.display = 'block';
+            setTimeout(() => {
+              window.location.href = "index.html";
+            }, 2000);
+          }
+        }, 500);
+      } else {
+        btn.style.backgroundColor = '#f44336';
+        btn.style.color = '#fff';
+      }
+    }
+
+    // Daha sık çilek oluştur
+    for (let i = 0; i < 40; i++) {
+      const strawberry = document.createElement('div');
+      strawberry.className = 'strawberry';
+      strawberry.style.left = Math.random() * 100 + 'vw';
+      strawberry.style.animationDelay = Math.random() * 5 + 's';
+      strawberry.style.opacity = Math.random() * 0.5 + 0.5;
+      document.body.appendChild(strawberry);
+    }
+  </script>
+</body>
+</html>

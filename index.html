@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İyi ki Doğdun Ebrar 🍓</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Dancing Script', cursive;
+      background-color: #ffffff;
+      background-image: url('background.png');
+      background-repeat: repeat;
+      background-size: cover;
+      background-position: center;
+      color: #d6336c;
+      text-align: center;
+      padding: 50px 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    p {
+      font-size: 1.3em;
+      margin: 15px auto;
+      max-width: 600px;
+      line-height: 1.5;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .surprise-btn {
+      background-color: #d6336c;
+      color: #fff;
+      border: none;
+      padding: 18px 36px;
+      font-size: 1.1em;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 30px;
+      box-shadow: 0 6px 20px rgba(214, 51, 108, 0.4);
+      transition: 0.3s;
+    }
+
+    .surprise-btn:hover {
+      background-color: #c5205a;
+      transform: scale(1.05);
+    }
+
+    #surprise-message {
+      display: none;
+      margin-top: 25px;
+      font-size: 1.4em;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #surprise-message.show {
+      display: block;
+      opacity: 1;
+      animation: popUp 1s ease;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popUp {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-image: url('strawberry_icon.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fall 8s linear infinite;
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>İyi ki Doğdun Hayatım, Ebrar 🍓</h1>
+  <p>Bugün dünya daha güzel çünkü sen varsın.<br />
+     Gülüşünle aydınlanan her sabah, seninle başlıyorsa anlamlı.<br />
+     İyi ki varsın.</p>
+
+  <button class="surprise-btn" onclick="showSurprise()">🎁 Sürprizi Gör</button>
+
+  <div id="surprise-message">
+    <p>Seninle geçirdiğim her zaman, hayatımın en güzel anı oldu. Zaman seninle hem duruyor, hem de uçup gidiyor. Gözlerinin içine baktığımda, geleceğe dair tüm düşüncelerim aklımda canlanıyor. Dudaklarını hissettiğimde, dünya daha güvenli bir yer oluyor. Seninle bir hayatı paylaşmak, benim için bir hayalden çok daha fazlası… Gerçekleşmiş en güzel mucize. Yeni bir yaşa girerken, sadece bugünü değil, geçmişi ve geleceği de seninle kutluyorum. İyi ki doğdun, iyi ki varsın, iyi ki hayatıma ‘sen’ iyi ki hayatımıza 'var' oldun sevgilim.</p>
+  </div>
+
+  <audio id="bg-music" src="tum-bir-yasam.mp3" autoplay loop></audio>
+
+  <script>
+    function showSurprise() {
+      const msg = document.getElementById('surprise-message');
+      msg.classList.add('show');
+
+      const music = document.getElementById('bg-music');
+      if (music.paused) {
+        music.play().catch(() => {});
+      }
+    }
+
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
